@@ -1,5 +1,6 @@
 function Panel_com(command, argument)
 
+
 %   Sends commands out to the panels
 %  ARGUMENTS MUST BE ROW VECTORS
 % Acceptable panel commands are:

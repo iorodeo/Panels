@@ -553,6 +553,7 @@ update_status_display(['Pattern ' num2str(Pattern_ID) ' is the current pattern']
 
 function Send_Gain_Bias(handles)
 % this function sends out the new gain and bias values to the controller
+Panel_com('stop')
 gain_x = round(100*handles.PC.x_gain_val/(handles.PC.x_gain_max));
 gain_y = round(100*handles.PC.y_gain_val/(handles.PC.y_gain_max));
 bias_x = round(100*handles.PC.x_offset_val/(handles.PC.x_offset_max));
@@ -560,7 +561,9 @@ bias_y = round(100*handles.PC.y_offset_val/(handles.PC.y_offset_max));
 Panel_com('send_gain_bias', [gain_x, bias_x, gain_y, bias_y]);
 update_status_display(['Sending: gain_x = ' num2str(gain_x) ', bias_x = ' num2str(bias_x) ...
     ', gain_y = ' num2str(gain_y) ', bias_y = ' num2str(bias_y)]);
-
+if handles.Running == true
+    Panel_com('start');
+end
 
 % --------------------------------------------------------------------
 function menu_reset_ctrl_Callback(hObject, eventdata, handles)
